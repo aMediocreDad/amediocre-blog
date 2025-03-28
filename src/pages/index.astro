@@ -1,0 +1,47 @@
+---
+import type { Frontmatter } from "./types";
+
+import Layout from "../layouts/home-layout.astro";
+import Link from "@/components/link.astro";
+import PostTitle from "@/components/postTitle.astro";
+
+const posts = Object.values(
+  import.meta.glob<Frontmatter>("../content/posts/*.md", {
+    eager: true,
+    import: "frontmatter",
+  }),
+);
+posts.sort((a, b) => {
+  return new Date(a.date) < new Date(b.date) ? 1 : -1;
+});
+---
+
+<Layout>
+  <div class="relative -top-[10px] flex flex-col gap-8">
+    {
+      posts.map((item) => {
+        return (
+          <Link
+            classList={[
+              "block scale-100 py-4 hover:scale-[1.005] active:scale-100",
+            ]}
+            target="_self"
+            href={"/" + item.title + "/"}
+          >
+            <article>
+              <PostTitle title={item.title} date={item.date} />
+              <p class="text-[13px] text-gray-700 dark:text-gray-300">
+                {new Date(item.date).toLocaleDateString("cn", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                })}
+              </p>
+              {/* <p class="mt-1">{item.frontmatter.spoiler}</p> */}
+            </article>
+          </Link>
+        );
+      })
+    }
+  </div>
+</Layout>

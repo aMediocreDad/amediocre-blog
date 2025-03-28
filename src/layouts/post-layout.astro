@@ -1,0 +1,67 @@
+---
+import BaseLayout from "./base-layout.astro";
+import Link from "@/components/link.astro";
+
+interface Props {
+  prevPost?: {
+    title: string;
+    date: string;
+  } | null;
+  nextPost?: {
+    title: string;
+    date: string;
+  } | null;
+}
+
+const { prevPost, nextPost } = Astro.props;
+---
+
+<BaseLayout>
+  <slot slot="main" />
+  <nav
+    slot="footer"
+    class="mt-12 flex justify-between border-t border-gray-300 pt-6 dark:border-gray-700"
+  >
+    <div class="flex-1">
+      {
+        prevPost && (
+          <Link
+            href={"/" + prevPost.title + "/"}
+            target="_self"
+            classList={[
+              "text-base font-medium text-gray-700 dark:text-gray-300",
+            ]}
+          >
+            {prevPost.title}
+          </Link>
+        )
+      }
+    </div>
+
+    <div class="flex flex-col items-center justify-center px-4">
+      <Link
+        href="/"
+        target="_self"
+        classList={["text-sm text-gray-500 dark:text-gray-400"]}
+      >
+        Home
+      </Link>
+    </div>
+
+    <div class="flex-1 text-right">
+      {
+        nextPost && (
+          <Link
+            href={"/" + nextPost.title + "/"}
+            target="_self"
+            classList={[
+              "text-base font-medium text-gray-700 dark:text-gray-300",
+            ]}
+          >
+            {nextPost.title}
+          </Link>
+        )
+      }
+    </div>
+  </nav>
+</BaseLayout>

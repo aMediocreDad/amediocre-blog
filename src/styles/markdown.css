@@ -1,0 +1,130 @@
+.markdown {
+  line-height: 28px;
+  --path: none;
+  --radius-top: 12px;
+  --radius-bottom: 12px;
+  --padding-top: 1rem;
+  --padding-bottom: 1rem;
+}
+
+.markdown p {
+  padding-block-end: calc(8* var(--spacing));
+}
+
+.markdown a {
+  border-block-end: 1px solid var(--link);
+  color: var(--link);
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.markdown hr {
+  padding-block-start: calc(8 * var(--spacing));
+  opacity: 0.6;
+  dark & {
+    opacity: 0.1;
+  }
+}
+
+.markdown h2,
+.markdown h3,
+.markdown h4 {
+  margin-block-start: calc(2 * var(--spacing));
+  padding-block-end: calc(8 * var(--spacing));
+  font-weight: var(--font-weight-bold);
+}
+
+.markdown h2 {
+  font-size: var(--text-3xl);
+  line-height: var(--text-3xl--line-height);
+}
+
+.markdown h3 {
+  font-size: var(--text-2xl);
+  line-height: var(--text-2xl--line-height);
+}
+
+.markdown h4 {
+  font-size: var(--text-xl);
+  line-height: var(--text-xl--line-height);
+}
+
+.markdown :not(pre) > code {
+  border-radius: 10px;
+  background: var(--inlineCode-bg);
+  color: var(--inlineCode-text);
+  padding: 0.15em 0.2em 0.05em;
+  white-space: normal;
+}
+
+.markdown pre {
+  margin-inline: calc(-4 * var(--spacing));
+  margin-block-end: calc(8 * var(--spacing));
+  padding: calc(4 * var(--spacing));
+  overflow-y: auto;
+  white-space: pre;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+  clip-path: var(--path);
+  border-top-right-radius: var(--radius-top);
+  border-top-left-radius: var(--radius-top);
+  border-bottom-right-radius: var(--radius-bottom);
+  border-bottom-left-radius: var(--radius-bottom);
+  padding-top: var(--padding-top);
+  padding-bottom: var(--padding-bottom);
+}
+
+.markdown pre code {
+  width: auto;
+}
+
+.markdown blockquote {
+  position: relative;
+  margin-block-end: calc(8 * var(--spacing));
+  left: calc(-2 * var(--spacing));
+  margin-inline-start: calc(-4 * var(--spacing));
+  padding-inline-start: calc(4 * var(--spacing));
+  font-style: italic;
+  border-left: 3px solid hsla(0, 0%, 0%, 0.9);
+  border-left-color: inherit;
+  opacity: 0.8;
+}
+
+.markdown blockquote p {
+  margin: 0;
+  padding: 0;
+}
+
+.markdown p img {
+  margin-bottom: 0;
+}
+
+.markdown ul {
+  margin-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+  margin-bottom: 1.75rem;
+  list-style-position: outside;
+  list-style-image: none;
+  list-style: disc;
+}
+
+.markdown li {
+  margin-bottom: calc(1.75rem / 2);
+}
+
+.markdown img {
+  margin-block-end: var(--spacing-8);
+  max-width: 100%;
+}
+
+.markdown pre [data-highlighted-line] {
+  margin-left: -16px;
+  padding-left: 12px;
+  border-left: 4px solid #ffa7c4;
+  background-color: #022a4b;
+  display: block;
+  padding-right: 1em;
+}

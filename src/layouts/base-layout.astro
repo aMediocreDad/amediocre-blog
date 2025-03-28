@@ -1,0 +1,63 @@
+---
+import "@/styles/globals.css";
+import "@fontsource/merriweather";
+import { ClientRouter } from "astro:transitions";
+import LoadingIndicator from "astro-loading-indicator/component";
+
+import Header from "@/components/header.astro";
+import Link from "@/components/link.astro";
+import ThemeToggle from "@/components/themeToggle.astro";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>aMediocreBlog</title>
+    <ClientRouter />
+    <LoadingIndicator color="#2f2f2f" />
+    <script is:inline>
+      const setTheme = () => {
+        document.documentElement.classList.toggle(
+          "dark",
+          localStorage.theme === "dark" ||
+            (!("theme" in localStorage) &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches),
+        );
+      };
+
+      document.addEventListener("astro:after-swap", setTheme);
+      window.addEventListener("storage", setTheme);
+      // document.addEventListener("astro:page-load", () => {});
+      setTheme();
+    </script>
+  </head>
+  <body class="mx-auto max-w-2xl bg-(--bg) px-5 py-12 text-(--text)">
+    <Header />
+    <main class="flex flex-col">
+      <slot name="main" />
+    </main>
+    <footer>
+      <slot name="footer" />
+
+      <aside class="pt-12 mt-auto mb-0 flex justify-between items-center">
+        <Link
+          href="/rss.xml"
+          classList={[
+            "text-sm",
+            "text-gray-500",
+            "dark:text-gray-400",
+            "hover:scale-[1.005]",
+            "active:scale-100",
+          ]}
+        >
+          RSS
+        </Link>
+        <ThemeToggle />
+      </aside>
+    </footer>
+  </body>
+</html>

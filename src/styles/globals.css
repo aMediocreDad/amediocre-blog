@@ -1,0 +1,71 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-*: initial;
+  --font-sans:
+  Merriweather, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/*
+The default border color has changed to `currentColor` in Tailwind CSS v4,
+so we've added these compatibility styles to make sure everything still
+looks the same as it did with Tailwind CSS v3.
+
+If we ever want to remove these styles, we need to add an explicit border
+color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@layer base {
+  :root {
+    --text: #222;
+    --title: #222;
+    --bg: white;
+    --code-bg: #232936;
+    --link: oklch(0 0 35%);
+    --inlineCode-bg: rgba(255, 229, 100, 0.2);
+    --inlineCode-text: #1a1a1a;
+    --black: oklch(0 0 0%);
+    --white: oklch(0 0 100%);
+  }
+  
+  html.dark {
+    --text: rgba(255, 255, 255, 0.88);
+    --title: white;
+    --bg: rgb(13, 14, 15);
+    --code-bg: #191d27;
+    --link: oklch(0 0 75%);
+    --inlineCode-bg: rgba(115, 124, 153, 0.2);
+    --inlineCode-text: #e6e6e6;
+    --black: oklch(0 0 0%);
+    --white: oklch(0 0 100%);
+    
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+  }
+  
+  
+  @media (prefers-reduced-motion) {
+    * {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+  
+}

@@ -1,0 +1,36 @@
+---
+import Color from "colorjs.io";
+import "@fontsource/montserrat/900.css";
+
+interface Props {
+  title: string;
+  date: string;
+}
+
+const { title, date } = Astro.props;
+
+const lightStart = new Color("oklch(0.5 0 0)"); // Light gray for light mode start
+const lightEnd = new Color("oklch(0.1 0 0)"); // Dark gray for light mode end
+const lightRange = lightStart.range(lightEnd);
+const darkStart = new Color("oklch(0.9 0 0)"); // Light gray for dark mode start
+const darkEnd = new Color("oklch(0.6 0 0)"); // Mid-gray for dark mode end
+const darkRange = darkStart.range(darkEnd);
+const today = new Date();
+const timeSinceFirstPost = (
+  today.valueOf() - new Date(2025, 3, 28).valueOf()
+).valueOf();
+const timeSinceThisPost = (
+  today.valueOf() - new Date(date).valueOf()
+).valueOf();
+const staleness = timeSinceThisPost / timeSinceFirstPost;
+---
+
+<h2
+  class="text-[28px] font-black text-(--lightLink) dark:text-(--darkLink) font-['Montserrat']"
+  style={{
+    "--lightLink": lightRange(staleness).toString(),
+    "--darkLink": darkRange(staleness).toString(),
+  }}
+>
+  {title}
+</h2>
